@@ -501,12 +501,21 @@ export function BackgroundForm() {
             <TabsContent value="custom">
               <Card className="p-2">
                 <Label htmlFor="custom-color">Custom Color</Label>
-                <Input id="custom-color" value={template.background.color} />
+                <Input
+                  id="custom-color"
+                  value={template.background.type === "color" ? template.background.color : ""}
+                />
                 <Button variant="outline" onClick={() => {
-                  template.setBackground({
-                    ...template.background,
-                    color: template.background.color,
-                  })
+                  const input = document.getElementById("custom-color") as HTMLInputElement;
+                  const colorValue = input.value;
+                  if (colorValue) {
+                    template.setBackground({
+                      type: "color",
+                      color: colorValue,
+                      noise: template.background.noise,
+                      gridOverlay: template.background.gridOverlay,
+                    })
+                  }
                 }}>Set</Button>
               </Card>
             </TabsContent>
