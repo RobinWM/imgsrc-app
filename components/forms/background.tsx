@@ -43,6 +43,7 @@ import { Slider } from "@/components/ui/slider"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 import { ResponsivePopover } from "../responsive-popover"
+import { Input } from "../ui/input"
 
 const solidColors = [
   // red/pink
@@ -268,6 +269,7 @@ export function BackgroundForm() {
             <TabsList>
               <TabsTrigger value="linear-gradient">Gradient</TabsTrigger>
               <TabsTrigger value="color">Solid Color</TabsTrigger>
+              <TabsTrigger value="custom">Custom Color</TabsTrigger>
             </TabsList>
 
             <TabsContent value="linear-gradient" className="space-y-4">
@@ -493,6 +495,19 @@ export function BackgroundForm() {
                     ))}
                   </div>
                 </RadioGroup>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="custom">
+              <Card className="p-2">
+                <Label htmlFor="custom-color">Custom Color</Label>
+                <Input id="custom-color" value={template.background.color} />
+                <Button variant="outline" onClick={() => {
+                  template.setBackground({
+                    ...template.background,
+                    color: template.background.color,
+                  })
+                }}>Set</Button>
               </Card>
             </TabsContent>
           </Tabs>
